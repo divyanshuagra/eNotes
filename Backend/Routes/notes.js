@@ -17,6 +17,7 @@ router.post('/addnotes', fetchUser, [
     body('description').isLength({ min: 10 })
 ], async (req, res) => {
 
+    console.log("div")
     const { title, description, tag } = req.body
     //if there are any validation errors, return errors
     const errors = validationResult(req);
@@ -51,6 +52,7 @@ router.put('/updatenote/:id', fetchUser, [
     const { title, description, tag } = req.body
     //if there are any validation errors, return errors
     const errors = validationResult(req);
+    console.log(errors.array())
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
@@ -76,7 +78,6 @@ router.put('/updatenote/:id', fetchUser, [
 
         //save the updated note
         note.save()
-
         res.json(note)
     } catch (error) {
         console.log(error.message)

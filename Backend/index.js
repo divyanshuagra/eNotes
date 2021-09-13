@@ -1,11 +1,13 @@
 const connectToMongo = require('./db')
 const express = require('express')
 const auth = require('./Routes/auth')
-const notes= require('./Routes/notes')
+const notes = require('./Routes/notes')
 const app = express()
+const cors = require('cors')
 const port = 5000  //3000 port for react app
 
 connectToMongo()
+app.use(cors())
 app.use(express.json())   //used for parsing incoming json
 
 app.use('/api/auth', auth)
